@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useSessionStorage } from "../hooks/useSessionStorage";
-import { CreateAccount } from "./Account_dataHandle"
 
 const AuthContext = createContext();
 
@@ -53,15 +52,15 @@ export const AuthProvider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: "Bearer " + userSessionToken,
         },
         body: JSON.stringify(data),
       });
       const res = await response.json();
       if (res.StatusObj.State) {
-        alert('Create account sucess');
+        alert('Create account success');
         history.push('/login');
       }
-      setAllUser(res);
     } catch (err) {
       console.error(err);
     }

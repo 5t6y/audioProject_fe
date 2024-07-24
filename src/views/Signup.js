@@ -146,7 +146,6 @@ const Signup = () => {
       password: pass,
       role: 'user'
     }
-    console.log("form data", accDetails);
     if (accDetails.user === "" || accDetails.pass === "") {
       alert("Please enter a value");
     }
@@ -154,6 +153,8 @@ const Signup = () => {
       alert("Failed requirement");
     }
     else {
+      accDetails.uuid = crypto.randomUUID();
+      console.log("form data", accDetails);
       signup(accDetails);
     }
   };
